@@ -1,4 +1,4 @@
-.PHONY: help lint test security docker-build docker-scan up down logs migrate shell
+.PHONY: help lint test security docker-build docker-scan up down logs migrate shell superuser
 
 REGISTRY  ?= ghcr.io/josedevapps
 TAG       ?= local
@@ -17,6 +17,7 @@ help:
 	@echo "  make docker-build  Construye imágenes de todos los servicios"
 	@echo "  make docker-scan   Trivy scan en imágenes locales"
 	@echo "  make migrate       Ejecuta migraciones en servicio web"
+	@echo "  make superuser     Crea superusuario admin (primera vez)"
 	@echo "  make shell         Shell en contenedor web"
 	@echo ""
 
@@ -68,6 +69,14 @@ docker-scan:
 
 migrate:
 	docker compose exec web python manage.py migrate
+
+superuser:
+	docker compose exec web python manage.py shell -c "\
+from django.contrib.auth import get_user_model; \
+User = get_user_model(); \
+u, created = User.objects.get_or_create(username='admin', defaults={'email':'admin@pmp.local','is_staff':True,'is_superuser':True}); \
+u.set_password('PMP@admin2026!'); u.save(); \
+print('Creado:' if created else 'Actualizado:','admin / PMP@admin2026!')"
 
 shell:
 	docker compose exec web python manage.py shell
