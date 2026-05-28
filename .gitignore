@@ -1,0 +1,61 @@
+# Secretos y entorno
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_rsa.pub
+*.secret
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+pip-wheel-metadata/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Django
+*/migrations/*.py
+!*/migrations/__init__.py
+media/
+staticfiles/
+*.log
+
+# Docker
+.docker/
+
+# Backups de base de datos — NUNCA versionar
+backup*.sql
+db_backup*.sql
+*.dump
+*.bak
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Reportes de seguridad locales
+*.sarif
+reports/
+trivy-*.json
+sbom/
+SBOM/

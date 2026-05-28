@@ -1,0 +1,56 @@
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "github-actions"]
+
+  - package-ecosystem: "docker"
+    directory: "/services/web"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "docker", "service-web"]
+
+  - package-ecosystem: "docker"
+    directory: "/services/api"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "docker", "service-api"]
+
+  - package-ecosystem: "docker"
+    directory: "/services/ws"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "docker", "service-ws"]
+
+  - package-ecosystem: "docker"
+    directory: "/services/worker"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "docker", "service-worker"]
+
+  - package-ecosystem: "pip"
+    directory: "/services/web"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "python", "service-web"]
+
+  - package-ecosystem: "pip"
+    directory: "/services/api"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "python", "service-api"]
+
+  - package-ecosystem: "pip"
+    directory: "/services/ws"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "python", "service-ws"]
+
+  - package-ecosystem: "pip"
+    directory: "/services/worker"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "python", "service-worker"]

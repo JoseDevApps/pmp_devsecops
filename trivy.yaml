@@ -1,0 +1,16 @@
+severity:
+  - CRITICAL
+  - HIGH
+
+scanners:
+  - vuln
+  - secret
+  - misconfig
+
+vuln:
+  ignore-unfixed: true
+
+secret:
+  config: .trivyignore
+
+format: table

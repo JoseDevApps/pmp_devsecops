@@ -1,0 +1,14 @@
+.git
+.github
+.env
+.env.*
+*.pem
+*.key
+__pycache__
+.pytest_cache
+.coverage
+*.pyc
+*.log
+.DS_Store
+venv/
+.venv/

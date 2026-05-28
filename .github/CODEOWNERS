@@ -1,0 +1,18 @@
+# Cambios en CI/CD, Docker e infra requieren revisión de seguridad
+.github/workflows/        @JoseDevApps
+.github/CODEOWNERS        @JoseDevApps
+Dockerfile                @JoseDevApps
+services/*/Dockerfile     @JoseDevApps
+docker-compose*.yml       @JoseDevApps
+infra/                    @JoseDevApps
+.semgrep.yml              @JoseDevApps
+trivy.yaml                @JoseDevApps
+
+# Servicios individuales
+services/web/             @JoseDevApps
+services/api/             @JoseDevApps
+services/ws/              @JoseDevApps
+services/worker/          @JoseDevApps
+
+# Documentación de seguridad
+docs/                     @JoseDevApps

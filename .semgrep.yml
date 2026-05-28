@@ -1,0 +1,45 @@
+rules:
+  # H-02: csrf_exempt en vistas activas — hallazgo crítico del diagnóstico
+  - id: pmp-csrf-exempt-banned
+    patterns:
+      - pattern: "@csrf_exempt"
+    message: >
+      @csrf_exempt detectado. Las vistas activas no deben desactivar CSRF.
+      Si es código legacy de views2.py, eliminar o aislar. Ver H-02 del diagnóstico.
+    languages: [python]
+    severity: ERROR
+    metadata:
+      category: security
+      owasp: "A05:2021 - Security Misconfiguration"
+      references:
+        - "docs/inventario-riesgos.md"
+
+  # Secretos hardcodeados en settings
+  - id: pmp-hardcoded-secret-key
+    pattern: SECRET_KEY = "..."
+    message: "SECRET_KEY hardcodeada detectada. Mover a variable de entorno."
+    languages: [python]
+    severity: ERROR
+    metadata:
+      owasp: "A02:2021 - Cryptographic Failures"
+
+  # DEBUG=True en producción
+  - id: pmp-debug-true
+    pattern: DEBUG = True
+    message: "DEBUG=True detectado. Debe ser controlado por variable de entorno en producción."
+    languages: [python]
+    severity: WARNING
+    metadata:
+      owasp: "A05:2021 - Security Misconfiguration"
+
+  # SQL raw sin parámetros (potencial SQLi)
+  - id: pmp-raw-sql-injection
+    patterns:
+      - pattern: $OBJ.objects.raw($SQL % ...)
+      - pattern: cursor.execute($SQL % ...)
+      - pattern: cursor.execute($SQL.format(...))
+    message: "Posible inyección SQL. Usar parámetros con placeholders, no formato de string."
+    languages: [python]
+    severity: ERROR
+    metadata:
+      owasp: "A03:2021 - Injection"
